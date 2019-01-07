@@ -361,7 +361,7 @@ is_record(uint8_t *msg, size_t msglen) {
       && strchr(content_types, msg[0])
 #endif
       && msg[1] == HIGH(DTLS_VERSION)
-      && msg[2] == LOW(DTLS_VERSION)) 
+      && (msg[2] == LOW(DTLS_VERSION) || msg[2] == 0xff)) 
     {
       rlen = DTLS_RH_LENGTH + 
 	dtls_uint16_to_int(DTLS_RECORD_HEADER(msg)->length);
